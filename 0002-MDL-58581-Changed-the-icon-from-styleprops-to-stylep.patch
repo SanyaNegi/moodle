@@ -1,0 +1,26 @@
+From e20557c82e424736218d7e40a4f33d47cb3d8130 Mon Sep 17 00:00:00 2001
+From: SanyaNegi <sanya@sanya-HP-Notebook>
+Date: Sat, 9 Mar 2019 06:46:05 +0530
+Subject: [PATCH 2/3] MDL 58581: Changed the icon from styleprops to
+ styleparagraph (which is better)
+
+---
+ lib/editor/atto/plugins/title/yui/src/button/js/button.js | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/lib/editor/atto/plugins/title/yui/src/button/js/button.js b/lib/editor/atto/plugins/title/yui/src/button/js/button.js
+index 80bfad1..d2d9027 100644
+--- a/lib/editor/atto/plugins/title/yui/src/button/js/button.js
++++ b/lib/editor/atto/plugins/title/yui/src/button/js/button.js
+@@ -65,7 +65,7 @@ Y.namespace('M.atto_title').Button = Y.Base.create('button', Y.M.editor_atto.Edi
+             });
+         });
+         this.addToolbarMenu({
+-            icon: 'e/styleprops',
++            icon: 'e/styleparagraph',
+             globalItemConfig: {
+                 callback: this._changeStyle
+             },
+-- 
+2.7.4
+

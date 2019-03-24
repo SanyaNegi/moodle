@@ -1,0 +1,26 @@
+From 011934cdcd5134b549d89658c8d81703b137c432 Mon Sep 17 00:00:00 2001
+From: SanyaNegi <sanya@sanya-HP-Notebook>
+Date: Sat, 9 Mar 2019 07:01:32 +0530
+Subject: [PATCH 2/2] MDL-58581: added fontawesome icon mapping by mapping
+ 'core:e/styleparagraph' => 'fa-paragraph'
+
+---
+ lib/classes/output/icon_system_fontawesome.php | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/lib/classes/output/icon_system_fontawesome.php b/lib/classes/output/icon_system_fontawesome.php
+index 8d9672f..582d5e6 100644
+--- a/lib/classes/output/icon_system_fontawesome.php
++++ b/lib/classes/output/icon_system_fontawesome.php
+@@ -156,7 +156,7 @@ class icon_system_fontawesome extends icon_system_font {
+             'core:e/spellcheck' => 'fa-check',
+             'core:e/split_cells' => 'fa-columns',
+             'core:e/strikethrough' => 'fa-strikethrough',
+-            'core:e/styleprops' => 'fa-info',
++            'core:e/styleparagraph' => 'fa-paragraph',
+             'core:e/subscript' => 'fa-subscript',
+             'core:e/superscript' => 'fa-superscript',
+             'core:e/table_props' => 'fa-table',
+-- 
+2.7.4
+
