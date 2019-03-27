@@ -131,11 +131,11 @@ class ADODB_sybase extends ADOConnection {
 		if ($this->port) {
 			$argHostname .= ':' . $this->port;
 		}
-
+		
 		if ($this->charSet) {
-			$this->_connectionID = sybase_connect($argHostname,$argUsername,$argPassword, $this->charSet);
+			$this->_connectionID = @sybase_connect($argHostname,$argUsername,$argPassword, $this->charSet);
 		} else {
-			$this->_connectionID = sybase_connect($argHostname,$argUsername,$argPassword);
+			$this->_connectionID = @sybase_connect($argHostname,$argUsername,$argPassword);
 		}
 
 		if ($this->_connectionID === false) return false;
