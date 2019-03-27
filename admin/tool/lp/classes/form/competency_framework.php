@@ -109,7 +109,7 @@ class competency_framework extends persistent {
         // Not using taxonomies[n] here or it would takes precedence over set_data(array('taxonomies' => ...)).
         $mform->setDefault('taxonomies', $taxdefaults);
 
-        $this->add_action_buttons(true, get_string('savechanges', 'tool_lp'));
+        $this->add_action_buttons(true, get_string('addcompetency', 'tool_lp'));
     }
 
     /**

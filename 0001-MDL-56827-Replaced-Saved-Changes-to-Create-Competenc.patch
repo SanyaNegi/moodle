@@ -1,0 +1,382 @@
+From 58dfde07b147a6ec680c410961acddd7a76984d6 Mon Sep 17 00:00:00 2001
+From: SanyaNegi <sanya@sanya-HP-Notebook>
+Date: Wed, 27 Mar 2019 05:49:04 +0530
+Subject: [PATCH] MDL 56827: Replaced 'Saved Changes' to 'Create Competency' in
+ competency.php and competency_framework.php files by creating a new string
+ reference in tool_lp.
+
+---
+ admin/tool/lp/classes/form/competency.php          |   2 +-
+ .../tool/lp/classes/form/competency_framework.php  |   2 +-
+ admin/tool/lp/lang/en/tool_lp.php                  |   1 +
+ mypatch2.patch                                     | 320 +++++++++++++++++++++
+ 4 files changed, 323 insertions(+), 2 deletions(-)
+ create mode 100644 mypatch2.patch
+
+diff --git a/admin/tool/lp/classes/form/competency.php b/admin/tool/lp/classes/form/competency.php
+index a59427c..54f4373 100644
+--- a/admin/tool/lp/classes/form/competency.php
++++ b/admin/tool/lp/classes/form/competency.php
+@@ -132,7 +132,7 @@ class competency extends persistent {
+ 
+         // Disable short forms.
+         $mform->setDisableShortforms();
+-        $this->add_action_buttons(true, get_string('savechanges', 'tool_lp'));
++        $this->add_action_buttons(true, get_string('createcompetency', 'tool_lp'));
+     }
+ 
+     /**
+diff --git a/admin/tool/lp/classes/form/competency_framework.php b/admin/tool/lp/classes/form/competency_framework.php
+index ee5d8f7..8ac2e18 100644
+--- a/admin/tool/lp/classes/form/competency_framework.php
++++ b/admin/tool/lp/classes/form/competency_framework.php
+@@ -109,7 +109,7 @@ class competency_framework extends persistent {
+         // Not using taxonomies[n] here or it would takes precedence over set_data(array('taxonomies' => ...)).
+         $mform->setDefault('taxonomies', $taxdefaults);
+ 
+-        $this->add_action_buttons(true, get_string('savechanges', 'tool_lp'));
++        $this->add_action_buttons(true, get_string('createcompetency', 'tool_lp'));
+     }
+ 
+     /**
+diff --git a/admin/tool/lp/lang/en/tool_lp.php b/admin/tool/lp/lang/en/tool_lp.php
+index 8de80cd..d895baa 100644
+--- a/admin/tool/lp/lang/en/tool_lp.php
++++ b/admin/tool/lp/lang/en/tool_lp.php
+@@ -80,6 +80,7 @@ $string['coursecompetencyratingsarepushedtouserplans'] = 'Competency ratings in
+ $string['coursecompetencyratingsquestion'] = 'When a course competency is rated, does the rating update the competency in the learning plans, or is it only applied to the course?';
+ $string['coursesusingthiscompetency'] = 'Courses linked to this competency';
+ $string['coveragesummary'] = '{$a->competenciescoveredcount} of {$a->competenciescount} competencies are covered ( {$a->coveragepercentage}% )';
++$string['createcompetency']= 'Create Competency';
+ $string['createplans'] = 'Create learning plans';
+ $string['createlearningplans'] = 'Create learning plans';
+ $string['crossreferencedcompetencies'] = 'Cross-referenced competencies';
+diff --git a/mypatch2.patch b/mypatch2.patch
+new file mode 100644
+index 0000000..fed4c13
+--- /dev/null
++++ b/mypatch2.patch
+@@ -0,0 +1,320 @@
++From 12a125b6b43b7ad200916e7a9ff72e17e7a1d0d6 Mon Sep 17 00:00:00 2001
++From: SanyaNegi <sanya@sanya-HP-Notebook>
++Date: Mon, 25 Mar 2019 04:25:58 +0530
++Subject: [PATCH 4/4] MDL-58581: added .png and .svg file for styleparagraph
++ icon
++
++---
++ ...hanged-the-icon-from-styleprops-to-stylep.patch |  26 +++++++
++ ...dded-a-styleparagraph-icon-png-file-to-th.patch |  30 ++++++++
++ ...hanged-the-icon-from-styleprops-to-stylep.patch |  26 +++++++
++ ...dded-fontawesome-icon-mapping-by-mapping-.patch |  26 +++++++
++ ...dded-fontawesome-icon-mapping-by-mapping-.patch |  26 +++++++
++ mypatch.patch                                      |  83 +++++++++++++++++++++
++ patch.txt                                          |   0
++ pix/e/styleparagraph.png                           | Bin 346 -> 519 bytes
++ pix/e/styleparagraph.svg                           |   5 ++
++ 9 files changed, 222 insertions(+)
++ create mode 100644 0001-MDL-58581-Changed-the-icon-from-styleprops-to-stylep.patch
++ create mode 100644 0001-MDL-58581-added-a-styleparagraph-icon-png-file-to-th.patch
++ create mode 100644 0002-MDL-58581-Changed-the-icon-from-styleprops-to-stylep.patch
++ create mode 100644 0002-MDL-58581-added-fontawesome-icon-mapping-by-mapping-.patch
++ create mode 100644 0003-MDL-58581-added-fontawesome-icon-mapping-by-mapping-.patch
++ create mode 100644 mypatch.patch
++ create mode 100644 patch.txt
++ create mode 100644 pix/e/styleparagraph.svg
++
++diff --git a/0001-MDL-58581-Changed-the-icon-from-styleprops-to-stylep.patch b/0001-MDL-58581-Changed-the-icon-from-styleprops-to-stylep.patch
++new file mode 100644
++index 0000000..0ac804c
++--- /dev/null
+++++ b/0001-MDL-58581-Changed-the-icon-from-styleprops-to-stylep.patch
++@@ -0,0 +1,26 @@
+++From e20557c82e424736218d7e40a4f33d47cb3d8130 Mon Sep 17 00:00:00 2001
+++From: SanyaNegi <sanya@sanya-HP-Notebook>
+++Date: Sat, 9 Mar 2019 06:46:05 +0530
+++Subject: [PATCH 1/2] MDL 58581: Changed the icon from styleprops to
+++ styleparagraph (which is better)
+++
+++---
+++ lib/editor/atto/plugins/title/yui/src/button/js/button.js | 2 +-
+++ 1 file changed, 1 insertion(+), 1 deletion(-)
+++
+++diff --git a/lib/editor/atto/plugins/title/yui/src/button/js/button.js b/lib/editor/atto/plugins/title/yui/src/button/js/button.js
+++index 80bfad1..d2d9027 100644
+++--- a/lib/editor/atto/plugins/title/yui/src/button/js/button.js
++++++ b/lib/editor/atto/plugins/title/yui/src/button/js/button.js
+++@@ -65,7 +65,7 @@ Y.namespace('M.atto_title').Button = Y.Base.create('button', Y.M.editor_atto.Edi
+++             });
+++         });
+++         this.addToolbarMenu({
+++-            icon: 'e/styleprops',
++++            icon: 'e/styleparagraph',
+++             globalItemConfig: {
+++                 callback: this._changeStyle
+++             },
+++-- 
+++2.7.4
+++
++diff --git a/0001-MDL-58581-added-a-styleparagraph-icon-png-file-to-th.patch b/0001-MDL-58581-added-a-styleparagraph-icon-png-file-to-th.patch
++new file mode 100644
++index 0000000..f0140b3
++--- /dev/null
+++++ b/0001-MDL-58581-added-a-styleparagraph-icon-png-file-to-th.patch
++@@ -0,0 +1,30 @@
+++From 49b9b5ba9a14e1c632ebdd3a90ccc0a533c73f70 Mon Sep 17 00:00:00 2001
+++From: SanyaNegi <sanya@sanya-HP-Notebook>
+++Date: Sat, 9 Mar 2019 06:43:34 +0530
+++Subject: [PATCH 1/3] MDL 58581: added a styleparagraph icon png file to the
+++ pix  folder to act as a replacement for styleprops
+++
+++---
+++ pix/e/styleparagraph.png | Bin 0 -> 346 bytes
+++ 1 file changed, 0 insertions(+), 0 deletions(-)
+++ create mode 100644 pix/e/styleparagraph.png
+++
+++diff --git a/pix/e/styleparagraph.png b/pix/e/styleparagraph.png
+++new file mode 100644
+++index 0000000000000000000000000000000000000000..a2d91f3359fe2a9a98cdf827bb6f2956a2294af5
+++GIT binary patch
+++literal 346
+++zcmeAS@N?(olHy`uVBq!ia0vp^0wB!61|;P_|4#%`EX7WqAsj$Z!;#Vf<Z~8yL>4nJ
+++zFsg$vWAC01XMlo|C9V-A!TD(=<%vb94CUqJdYO6I#mR{Use1WE>9gP2NC6dH_jGX#
+++zvFN=!aiQN)2LadfZ-crW7Zk9x-&Xs};9+1<!DUjzUEfgOrS5T|;?|aV6CN<MAKEUy
+++zSy5MCwN(G1%H+GA@6O!0+3LGEF(~wE*}UiG+x#1B6=tu9J|YqRN32C)+P3u#{+{0_
+++z&11Oqb6$$JXMQ%{t6g>+ihFLviMbYXUfA~5vVdJDXwFdy_jUC$DUsXeFS9*&xBkk4
+++z_rI@~*lt_P`BzFg@v;g3B)`UVPx)=-jfW$(8A@Wy6<><o*jPKI>wil2j47!<S!0$<
+++m*gaAS{%<q8{zAg%8fIrVJARcEiPb<aGI+ZBxvX<aXaWGvafN#T
+++
+++literal 0
+++HcmV?d00001
+++
+++-- 
+++2.7.4
+++
++diff --git a/0002-MDL-58581-Changed-the-icon-from-styleprops-to-stylep.patch b/0002-MDL-58581-Changed-the-icon-from-styleprops-to-stylep.patch
++new file mode 100644
++index 0000000..7f05e3f
++--- /dev/null
+++++ b/0002-MDL-58581-Changed-the-icon-from-styleprops-to-stylep.patch
++@@ -0,0 +1,26 @@
+++From e20557c82e424736218d7e40a4f33d47cb3d8130 Mon Sep 17 00:00:00 2001
+++From: SanyaNegi <sanya@sanya-HP-Notebook>
+++Date: Sat, 9 Mar 2019 06:46:05 +0530
+++Subject: [PATCH 2/3] MDL 58581: Changed the icon from styleprops to
+++ styleparagraph (which is better)
+++
+++---
+++ lib/editor/atto/plugins/title/yui/src/button/js/button.js | 2 +-
+++ 1 file changed, 1 insertion(+), 1 deletion(-)
+++
+++diff --git a/lib/editor/atto/plugins/title/yui/src/button/js/button.js b/lib/editor/atto/plugins/title/yui/src/button/js/button.js
+++index 80bfad1..d2d9027 100644
+++--- a/lib/editor/atto/plugins/title/yui/src/button/js/button.js
++++++ b/lib/editor/atto/plugins/title/yui/src/button/js/button.js
+++@@ -65,7 +65,7 @@ Y.namespace('M.atto_title').Button = Y.Base.create('button', Y.M.editor_atto.Edi
+++             });
+++         });
+++         this.addToolbarMenu({
+++-            icon: 'e/styleprops',
++++            icon: 'e/styleparagraph',
+++             globalItemConfig: {
+++                 callback: this._changeStyle
+++             },
+++-- 
+++2.7.4
+++
++diff --git a/0002-MDL-58581-added-fontawesome-icon-mapping-by-mapping-.patch b/0002-MDL-58581-added-fontawesome-icon-mapping-by-mapping-.patch
++new file mode 100644
++index 0000000..1cbcfb1
++--- /dev/null
+++++ b/0002-MDL-58581-added-fontawesome-icon-mapping-by-mapping-.patch
++@@ -0,0 +1,26 @@
+++From 011934cdcd5134b549d89658c8d81703b137c432 Mon Sep 17 00:00:00 2001
+++From: SanyaNegi <sanya@sanya-HP-Notebook>
+++Date: Sat, 9 Mar 2019 07:01:32 +0530
+++Subject: [PATCH 2/2] MDL-58581: added fontawesome icon mapping by mapping
+++ 'core:e/styleparagraph' => 'fa-paragraph'
+++
+++---
+++ lib/classes/output/icon_system_fontawesome.php | 2 +-
+++ 1 file changed, 1 insertion(+), 1 deletion(-)
+++
+++diff --git a/lib/classes/output/icon_system_fontawesome.php b/lib/classes/output/icon_system_fontawesome.php
+++index 8d9672f..582d5e6 100644
+++--- a/lib/classes/output/icon_system_fontawesome.php
++++++ b/lib/classes/output/icon_system_fontawesome.php
+++@@ -156,7 +156,7 @@ class icon_system_fontawesome extends icon_system_font {
+++             'core:e/spellcheck' => 'fa-check',
+++             'core:e/split_cells' => 'fa-columns',
+++             'core:e/strikethrough' => 'fa-strikethrough',
+++-            'core:e/styleprops' => 'fa-info',
++++            'core:e/styleparagraph' => 'fa-paragraph',
+++             'core:e/subscript' => 'fa-subscript',
+++             'core:e/superscript' => 'fa-superscript',
+++             'core:e/table_props' => 'fa-table',
+++-- 
+++2.7.4
+++
++diff --git a/0003-MDL-58581-added-fontawesome-icon-mapping-by-mapping-.patch b/0003-MDL-58581-added-fontawesome-icon-mapping-by-mapping-.patch
++new file mode 100644
++index 0000000..e010ec6
++--- /dev/null
+++++ b/0003-MDL-58581-added-fontawesome-icon-mapping-by-mapping-.patch
++@@ -0,0 +1,26 @@
+++From 011934cdcd5134b549d89658c8d81703b137c432 Mon Sep 17 00:00:00 2001
+++From: SanyaNegi <sanya@sanya-HP-Notebook>
+++Date: Sat, 9 Mar 2019 07:01:32 +0530
+++Subject: [PATCH 3/3] MDL-58581: added fontawesome icon mapping by mapping
+++ 'core:e/styleparagraph' => 'fa-paragraph'
+++
+++---
+++ lib/classes/output/icon_system_fontawesome.php | 2 +-
+++ 1 file changed, 1 insertion(+), 1 deletion(-)
+++
+++diff --git a/lib/classes/output/icon_system_fontawesome.php b/lib/classes/output/icon_system_fontawesome.php
+++index 8d9672f..582d5e6 100644
+++--- a/lib/classes/output/icon_system_fontawesome.php
++++++ b/lib/classes/output/icon_system_fontawesome.php
+++@@ -156,7 +156,7 @@ class icon_system_fontawesome extends icon_system_font {
+++             'core:e/spellcheck' => 'fa-check',
+++             'core:e/split_cells' => 'fa-columns',
+++             'core:e/strikethrough' => 'fa-strikethrough',
+++-            'core:e/styleprops' => 'fa-info',
++++            'core:e/styleparagraph' => 'fa-paragraph',
+++             'core:e/subscript' => 'fa-subscript',
+++             'core:e/superscript' => 'fa-superscript',
+++             'core:e/table_props' => 'fa-table',
+++-- 
+++2.7.4
+++
++diff --git a/mypatch.patch b/mypatch.patch
++new file mode 100644
++index 0000000..c0909b2
++--- /dev/null
+++++ b/mypatch.patch
++@@ -0,0 +1,83 @@
+++From 49b9b5ba9a14e1c632ebdd3a90ccc0a533c73f70 Mon Sep 17 00:00:00 2001
+++From: SanyaNegi <sanya@sanya-HP-Notebook>
+++Date: Sat, 9 Mar 2019 06:43:34 +0530
+++Subject: [PATCH 1/3] MDL 58581: added a styleparagraph icon png file to the
+++ pix  folder to act as a replacement for styleprops
+++
+++---
+++ pix/e/styleparagraph.png | Bin 0 -> 346 bytes
+++ 1 file changed, 0 insertions(+), 0 deletions(-)
+++ create mode 100644 pix/e/styleparagraph.png
+++
+++diff --git a/pix/e/styleparagraph.png b/pix/e/styleparagraph.png
+++new file mode 100644
+++index 0000000000000000000000000000000000000000..a2d91f3359fe2a9a98cdf827bb6f2956a2294af5
+++GIT binary patch
+++literal 346
+++zcmeAS@N?(olHy`uVBq!ia0vp^0wB!61|;P_|4#%`EX7WqAsj$Z!;#Vf<Z~8yL>4nJ
+++zFsg$vWAC01XMlo|C9V-A!TD(=<%vb94CUqJdYO6I#mR{Use1WE>9gP2NC6dH_jGX#
+++zvFN=!aiQN)2LadfZ-crW7Zk9x-&Xs};9+1<!DUjzUEfgOrS5T|;?|aV6CN<MAKEUy
+++zSy5MCwN(G1%H+GA@6O!0+3LGEF(~wE*}UiG+x#1B6=tu9J|YqRN32C)+P3u#{+{0_
+++z&11Oqb6$$JXMQ%{t6g>+ihFLviMbYXUfA~5vVdJDXwFdy_jUC$DUsXeFS9*&xBkk4
+++z_rI@~*lt_P`BzFg@v;g3B)`UVPx)=-jfW$(8A@Wy6<><o*jPKI>wil2j47!<S!0$<
+++m*gaAS{%<q8{zAg%8fIrVJARcEiPb<aGI+ZBxvX<aXaWGvafN#T
+++
+++literal 0
+++HcmV?d00001
+++
+++-- 
+++2.7.4
+++
+++From e20557c82e424736218d7e40a4f33d47cb3d8130 Mon Sep 17 00:00:00 2001
+++From: SanyaNegi <sanya@sanya-HP-Notebook>
+++Date: Sat, 9 Mar 2019 06:46:05 +0530
+++Subject: [PATCH 1/2] MDL 58581: Changed the icon from styleprops to
+++ styleparagraph (which is better)
+++
+++---
+++ lib/editor/atto/plugins/title/yui/src/button/js/button.js | 2 +-
+++ 1 file changed, 1 insertion(+), 1 deletion(-)
+++
+++diff --git a/lib/editor/atto/plugins/title/yui/src/button/js/button.js b/lib/editor/atto/plugins/title/yui/src/button/js/button.js
+++index 80bfad1..d2d9027 100644
+++--- a/lib/editor/atto/plugins/title/yui/src/button/js/button.js
++++++ b/lib/editor/atto/plugins/title/yui/src/button/js/button.js
+++@@ -65,7 +65,7 @@ Y.namespace('M.atto_title').Button = Y.Base.create('button', Y.M.editor_atto.Edi
+++             });
+++         });
+++         this.addToolbarMenu({
+++-            icon: 'e/styleprops',
++++            icon: 'e/styleparagraph',
+++             globalItemConfig: {
+++                 callback: this._changeStyle
+++             },
+++-- 
+++2.7.4
+++
+++
+++From 011934cdcd5134b549d89658c8d81703b137c432 Mon Sep 17 00:00:00 2001
+++From: SanyaNegi <sanya@sanya-HP-Notebook>
+++Date: Sat, 9 Mar 2019 07:01:32 +0530
+++Subject: [PATCH 2/2] MDL-58581: added fontawesome icon mapping by mapping
+++ 'core:e/styleparagraph' => 'fa-paragraph'
+++
+++---
+++ lib/classes/output/icon_system_fontawesome.php | 2 +-
+++ 1 file changed, 1 insertion(+), 1 deletion(-)
+++
+++diff --git a/lib/classes/output/icon_system_fontawesome.php b/lib/classes/output/icon_system_fontawesome.php
+++index 8d9672f..582d5e6 100644
+++--- a/lib/classes/output/icon_system_fontawesome.php
++++++ b/lib/classes/output/icon_system_fontawesome.php
+++@@ -156,7 +156,7 @@ class icon_system_fontawesome extends icon_system_font {
+++             'core:e/spellcheck' => 'fa-check',
+++             'core:e/split_cells' => 'fa-columns',
+++             'core:e/strikethrough' => 'fa-strikethrough',
+++-            'core:e/styleprops' => 'fa-info',
++++            'core:e/styleparagraph' => 'fa-paragraph',
+++             'core:e/subscript' => 'fa-subscript',
+++             'core:e/superscript' => 'fa-superscript',
+++             'core:e/table_props' => 'fa-table',
+++-- 
+++2.7.4
+++
++diff --git a/patch.txt b/patch.txt
++new file mode 100644
++index 0000000..e69de29
++diff --git a/pix/e/styleparagraph.png b/pix/e/styleparagraph.png
++index a2d91f3359fe2a9a98cdf827bb6f2956a2294af5..77179b71238b639c4cb3c0ebcd5e96dd63cce8db 100644
++GIT binary patch
++literal 519
++zcmeAS@N?(olHy`uVBq!ia0vp^{2<K13?z9tQY(NIOS+@4BLl<6e(pbstU$g(vPY0F
++z14ES>14Ba#1H&(%P{RubhEf9thF1v;3|2E37{m+a><Y92N<;<tgt!9f{{H?clO|1`
++zGzrL<*540gAkbtW6U2p(Q~UcH8XADy`Sa&P1R)wHgOx$lOrAIqC<Qduf6~TiASF{0
++z<QL4Ku;i_P(#uz09^d6#o3P%1=?BO4xbmM;(WSc^95%-P0IFk5@^*J&=wOxg0CG4B
++zJR*yM-o6gPj7}P}L4IW~@$_|Nf6Oc)WMx!y)$TM<$ivgcF@)p#)|2jh4F&=%2i4Mh
++zc-7whzuzgKuyNnz<(j+#M?3c{o$&O#j@QapY`31jsxmx~uyt;RG21+*$LYD#N<aTT
++z9)8^4j`8Myo@%y#L05ogs+PD$l%yn<q*^5xr2;7iBLhQAT?1oXBa;wAb1PE|D^mk)
++z14AnV1J;+S^(Y#0^HVa@DsgKl*)sPqP=h4MhT#0PlJdl&REF~Ma=pyF?Be9af>gcy
++WqV(DCY@~pS7(8A5T-G@yGywp$`?b;l
++
++delta 317
++zcmZo?xy9tx8Q|y6%O%Cdz`(%k>ERLtqy<2jgAGW^fBv5cq*#ibJVQ8upoSx*1IXtr
++z@Q5sCU|>`SVaDD)AI?m^#;8$$-P6S}#G?1^#D#uG9Rys@zYXekTu{K$ep~G?gNK1d
++z1(!(;cYQ;Bm%7J=id$ReO?bf2erUV+W<_0n)l&V3DwFSezB_a0W~=Yw#GuftW%Hh!
++zZ}V@kRhYdZ`iMmMAF&pJY1`H}_<MezG>_rZ&v_}@p845)uXfpSDDJrtC+1qnnR{W|
++zTgw7=ouD~KCEVB5%cMkZo4?HV+}-*s3*P^}UShj#E$3e;<;2S-{FD3|(>>+4l{X%a
++z)MhA&EmwRgc4K4hl&=3N*)yi3{$!0=E@AgbCHTM1?D`7{pKF+%-R$^PQY2Obz0Tn2
++L>gTe~DWM4fST%fy
++
++diff --git a/pix/e/styleparagraph.svg b/pix/e/styleparagraph.svg
++new file mode 100644
++index 0000000..63bf15c
++--- /dev/null
+++++ b/pix/e/styleparagraph.svg
++@@ -0,0 +1,5 @@
+++<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" version="1.1" style=""><rect id="backgroundrect" width="100%" height="100%" x="0" y="0" fill="none" stroke="none"/>
+++
+++<g class="currentLayer" style=""><title>Layer 1</title><g id="surface1" class="">
+++<path style=" stroke:none;fill-rule:nonzero;fill:rgb(57.647059%,57.254902%,57.254902%);fill-opacity:1;" d="M4.5,0 C2,0 0,2 0,4.5 C0,7 2,9 4.5,9 L7,9 L7,16 L9,16 L9,2 L10,2 L10,16 L12,16 L12,2 L14,2 L14,0 zM4.5,0 " id="svg_1"/>
+++</g></g></svg>
++\ No newline at end of file
++-- 
++2.7.4
++
+-- 
+2.7.4
+

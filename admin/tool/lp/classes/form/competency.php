@@ -132,7 +132,7 @@ class competency extends persistent {
 
         // Disable short forms.
         $mform->setDisableShortforms();
-        $this->add_action_buttons(true, get_string('savechanges', 'tool_lp'));
+        $this->add_action_buttons(true, get_string('addcompetency', 'tool_lp'));
     }
 
     /**
