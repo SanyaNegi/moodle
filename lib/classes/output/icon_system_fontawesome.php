@@ -156,7 +156,7 @@ class icon_system_fontawesome extends icon_system_font {
             'core:e/spellcheck' => 'fa-check',
             'core:e/split_cells' => 'fa-columns',
             'core:e/strikethrough' => 'fa-strikethrough',
-            'core:e/styleparagraph' => 'fa-paragraph',
+            'core:e/styleparagraph' => 'fa-font',
             'core:e/subscript' => 'fa-subscript',
             'core:e/superscript' => 'fa-superscript',
             'core:e/table_props' => 'fa-table',
