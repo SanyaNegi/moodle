@@ -129,8 +129,8 @@ if (($mytemplate = data_submitted()) && confirm_sesskey()) {
         $resettemplate = true;
         $data->{$mode} = data_generate_default_template($data, $mode, 0, false, false);
         if ($mode == 'listtemplate') {
-            $data->listtemplateheader = '';
-            $data->listtemplatefooter = '';
+            //$data->listtemplateheader = '';
+            //$data->listtemplatefooter = '';
         }
     } else {
         if (isset($mytemplate->listtemplateheader)){
