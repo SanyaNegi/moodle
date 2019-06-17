@@ -408,6 +408,28 @@ class processor implements \core_analytics\classifier, \core_analytics\regressor
         return $modelmanager->restoreFromFile($modelfilepath);
     }
 
+
+/**
+     * Loads the pre-trained regressor.
+     *
+     * @throws \moodle_exception
+     * @param string $outputdir
+     * @return \Phpml\Regression\LeastSquares
+     */
+    protected function load_regressor($outputdir) {
+        $modelfilepath = $this->get_model_filepath($outputdir);
+
+        if (!file_exists($modelfilepath)) {
+            throw new \moodle_exception('errorcantloadmodel', 'mlbackend_php', '', $modelfilepath);
+        }
+
+        $modelmanager = new ModelManager();
+        return $modelmanager->restoreFromFile($modelfilepath);
+    }
+
+	
+    
+
     /**
      * Train this processor regression model using the provided supervised learning dataset.
      *
@@ -671,8 +693,9 @@ class processor implements \core_analytics\classifier, \core_analytics\regressor
         // Clean stuff like function calls.
         $importconfig = preg_replace('/[^a-zA-Z0-9\{\}%\.\*\;\,\:\"\-\0\\\]/', '', $importconfig);
 
-        $object = unserialize($importconfig,
-            ['allowed_classes' => ['Phpml\\Classification\\Linear\\LogisticRegression']]);
+	//converts all objects into __PHP_Incomplete_Class object except those of 'allowed_classes' array         
+	$object = unserialize($importconfig,
+            ['allowed_classes' => ['Phpml\\Classification\\Linear\\LogisticRegression','Phpml\\Regression\\LeastSquares']]);
         if (!$object) {
             return false;
         }
@@ -681,13 +704,15 @@ class processor implements \core_analytics\classifier, \core_analytics\regressor
             return false;
         }
 
-        $classifier = $modelmanager->restoreFromFile($importmodelfilepath);
+	//model can be a regressor or classifier        
+	$model = $modelmanager->restoreFromFile($importmodelfilepath);
 
         // This would override any previous classifier.
-        $modelmanager->saveToFile($classifier, $modelfilepath);
+        $modelmanager->saveToFile($model, $modelfilepath);
 
         return true;
     }
+
 
     /**
      * Returns the path to the serialised model file in the provided directory.
